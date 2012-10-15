@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // -*- js -*-
 
-var args = process.argv.slice(2);
+var args = process.argv.slice(2),
+    cssmin = require('../cssmin').cssmin;
 
 function squeeze_out(css_in) {
-    process.stdout.write( require("cssmin").cssmin(css_in) );
+    process.stdout.write( cssmin(css_in) );
 }
 
 if (args.length) {
