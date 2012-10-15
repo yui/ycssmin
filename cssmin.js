@@ -4,6 +4,7 @@
  * node-cssmin
  * A simple module for Node.js that minify CSS
  * Author : Johan Bleuzen
+ * Forked and modified by YUI
  */
 
 /**
@@ -18,7 +19,7 @@
 
 /*
 * YUI Compressor
-* http://developer.yahoo.com/yui/compressor/
+* http://yui.github.com/yuicompressor/
 * Author: Julien Lecomte - http://www.julienlecomte.net/
 * Copyright (c) 2011 Yahoo! Inc. All rights reserved.
 * The copyrights embodied in the content of this file are licensed
