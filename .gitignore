@@ -1,5 +1,4 @@
 node-cssmin.esproj
-.*
 **/npm-debug.log
 node_modules/
 coverage/
