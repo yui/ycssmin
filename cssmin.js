@@ -1,3 +1,5 @@
+/*jshint maxlen: 250 */
+
 /**
  * node-cssmin
  * A simple module for Node.js that minify CSS
@@ -22,8 +24,6 @@
 * The copyrights embodied in the content of this file are licensed
 * by Yahoo! Inc. under the BSD (revised) open source license.
 */
-
-exports.cssmin = cssmin;
 
 function cssmin(css, linebreakpos) {
 
@@ -90,7 +90,8 @@ function cssmin(css, linebreakpos) {
             css = css.replace(placeholder,  "___YUICSSMIN_PRESERVED_TOKEN_" + (preservedTokens.length - 1) + "___");
             i = i + 1; // attn: advancing the loop
             preservedTokens.push("");
-            css = css.replace("___YUICSSMIN_PRESERVE_CANDIDATE_COMMENT_" + i + "___",  "___YUICSSMIN_PRESERVED_TOKEN_" + (preservedTokens.length - 1) + "___");
+            css = css.replace("___YUICSSMIN_PRESERVE_CANDIDATE_COMMENT_" + i + "___",
+                "___YUICSSMIN_PRESERVED_TOKEN_" + (preservedTokens.length - 1) + "___");
             continue;
         }
 
@@ -235,4 +236,8 @@ function cssmin(css, linebreakpos) {
 
     return css;
 
-};
+}
+
+
+exports.cssmin = cssmin;
+
