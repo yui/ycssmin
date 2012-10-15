@@ -2,7 +2,7 @@
 	"name": "ycssmin",
 	"version": "1.0.0",
 	"description": "CSS Minification from YUICompressor",
-	"main": "ycssmin",
+	"main": "./cssmin",
     "bin": {
         "ycssmin": "./bin/cssmin"
     },
