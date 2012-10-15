@@ -4,7 +4,7 @@
 	"description": "CSS Minification from YUICompressor",
 	"main": "ycssmin",
     "bin": {
-        "cssmin": "./bin/ycssmin"
+        "ycssmin": "./bin/cssmin"
     },
     "devDependencies": {
         "yui-lint": "~0.1.1",
