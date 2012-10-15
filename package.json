@@ -6,10 +6,22 @@
     "bin": {
         "cssmin": "./bin/cssmin"
     },
+    "devDependencies": {
+        "yui-lint": "~0.1.1",
+        "jshint": "~0.9.0",
+        "vows": "*" 
+    },
 	"author" : {
 		"name" : "Johan Bleuzen",
 		"url" : "http://blog.johanbleuzen.fr"
 	},
+    "contributors": [
+        { "name": "Dav Glass", "email": "davglass@gmail.com" }
+    ],
+    "scripts": {
+        "pretest": "jshint --config ./node_modules/yui-lint/jshint.json cssmin.js package.json",
+        "test": "istanbul test vows -- --spec ./tests/*.js"
+    },
     "repository" : {
         "type" : "git",
         "url"  : "http://github.com/jbleuzen/node-cssmin"
