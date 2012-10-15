@@ -21,6 +21,26 @@ Build Status
 
 [![Build Status](https://secure.travis-ci.org/yui/ycssmin.png)](http://travis-ci.org/yui/ycssmin)
 
+Testing
+-------
+
+Clone this repo:
+
+`npm test`
+
+Code Coverage
+-------------
+
+We are using [istanbul](https://github.com/gotwarlost/istanbul) to provide code coverage, to view the report:
+
+`npm test`
+
+Then open `./coverage/lcov-report`
+
+We also publish the [latest here](http://yui.github.com/ycssmin/).
+
+We ask that all patches have a test attached and full coverage.
+
 Usage
 -----
 
