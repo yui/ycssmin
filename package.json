@@ -1,10 +1,10 @@
 {
-	"name": "cssmin",
-	"version": "0.3.2",
-	"description": "A simple CSS minifier that uses a port of YUICompressor in JS",
-	"main": "cssmin",
+	"name": "ycssmin",
+	"version": "1.0.0",
+	"description": "CSS Minification from YUICompressor",
+	"main": "ycssmin",
     "bin": {
-        "cssmin": "./bin/cssmin"
+        "cssmin": "./bin/ycssmin"
     },
     "devDependencies": {
         "yui-lint": "~0.1.1",
@@ -12,12 +12,14 @@
         "istanbul": "https://github.com/gotwarlost/istanbul/tarball/textreport",
         "vows": "*" 
     },
-	"author" : {
-		"name" : "Johan Bleuzen",
-		"url" : "http://blog.johanbleuzen.fr"
-	},
-    "contributors": [
-        { "name": "Dav Glass", "email": "davglass@gmail.com" }
+    "author": "Dav Glass <davglass@gmail.com>",
+	"contributors" : [
+        "Johan Bleuzen (http://blog.johanbleuzen.fr)",
+        "Dav Glass <davglass@gmail.com>",
+        "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)"
+	],
+    "keywords": [
+        "minify", "cssmin", "compressor", "yuicompressor"
     ],
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json cssmin.js package.json",
@@ -25,6 +27,18 @@
     },
     "repository" : {
         "type" : "git",
-        "url"  : "http://github.com/jbleuzen/node-cssmin"
+        "url"  : "https://github.com/yui/ycssmin"
+    },
+    "preferGlobal": "true",
+    "bugs": { "url" : "http://github.com/yui/ycssmin/issues" },
+    "licenses":[
+        {
+            "type" : "BSD",
+            "url" : "https://github.com/yui/ycssmin/blob/master/LICENSE"
+        }
+    ],
+    "repository": {
+        "type":"git",
+        "url":"http://github.com/yui/ycssmin.git"
     }
 }
