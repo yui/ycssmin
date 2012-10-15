@@ -25,6 +25,116 @@
 * by Yahoo! Inc. under the BSD (revised) open source license.
 */
 
+
+var _compressHexColors = function(css) {
+
+    // Look for hex colors inside { ... } (to avoid IDs) and which don't have a =, or a " in front of them (to avoid filters)
+    var pattern = /(\=\s*?["']?)?#([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])(\}|[^0-9a-f{][^{]*?\})/gi,
+        m,
+        index = 0,
+        isFilter,
+        sb = [];
+
+    while ((m = pattern.exec(css)) !== null) {
+
+        sb.push(css.substring(index, m.index));
+
+        isFilter = m[1];
+
+        if (isFilter) {
+            // Restore, maintain case, otherwise filter will break
+            sb.push(m[1] + "#" + (m[2] + m[3] + m[4] + m[5] + m[6] + m[7]));
+        } else {
+            if (m[2].toLowerCase() === m[3].toLowerCase() &&
+                m[4].toLowerCase() === m[5].toLowerCase() &&
+                m[6].toLowerCase() === m[7].toLowerCase()) {
+
+                // Compress.
+                sb.push("#" + (m[3] + m[5] + m[7]).toLowerCase());
+            } else {
+                // Non compressible color, restore but lower case.
+                sb.push("#" + (m[2] + m[3] + m[4] + m[5] + m[6] + m[7]).toLowerCase());
+            }
+        }
+
+        index = pattern.lastIndex = pattern.lastIndex - m[8].length;
+    }
+
+    sb.push(css.substring(index));
+
+    return sb.join("");
+};
+
+
+var _extractDataUrls = function (css, preservedTokens) {
+
+    // Leave data urls alone to increase parse performance.
+    var maxIndex = css.length - 1,
+        appendIndex = 0,
+        startIndex,
+        endIndex,
+        terminator,
+        foundTerminator,
+        sb = [],
+        m,
+        preserver,
+        token,
+        pattern = /url\(\s*(["']?)data\:/g;
+
+    // Since we need to account for non-base64 data urls, we need to handle
+    // ' and ) being part of the data string. Hence switching to indexOf,
+    // to determine whether or not we have matching string terminators and
+    // handling sb appends directly, instead of using matcher.append* methods.
+
+    while ((m = pattern.exec(css)) !== null) {
+
+        startIndex = m.index + 4;  // "url(".length()
+        terminator = m[1];         // ', " or empty (not quoted)
+
+        if (terminator.length === 0) {
+            terminator = ")";
+        }
+
+        foundTerminator = false;
+
+        endIndex = pattern.lastIndex - 1;
+
+        while(foundTerminator === false && endIndex+1 <= maxIndex) {
+            endIndex = css.indexOf(terminator, endIndex + 1);
+
+            // endIndex == 0 doesn't really apply here
+            if ((endIndex > 0) && (css.charAt(endIndex - 1) !== '\\')) {
+                foundTerminator = true;
+                if (")" !== terminator) {
+                    endIndex = css.indexOf(")", endIndex);
+                }
+            }
+        }
+
+        // Enough searching, start moving stuff over to the buffer
+        sb.push(css.substring(appendIndex, m.index));
+
+        if (foundTerminator) {
+            token = css.substring(startIndex, endIndex);
+            token = token.replace(/\s+/g, "");
+            preservedTokens.push(token);
+
+            preserver = "url(___YUICSSMIN_PRESERVED_TOKEN_" + (preservedTokens.length - 1) + "___)";
+            sb.push(preserver);
+
+            appendIndex = endIndex + 1;
+        } else {
+            // No end terminator found, re-add the whole match. Should we throw/warn here?
+            sb.push(css.substring(m.index, pattern.lastIndex));
+            appendIndex = pattern.lastIndex;
+        }
+    }
+
+    sb.push(css.substring(appendIndex));
+
+    return sb.join("");
+};
+
 function cssmin(css, linebreakpos) {
 
     var startIndex = 0,
@@ -35,6 +145,9 @@ function cssmin(css, linebreakpos) {
         token = '',
         totallen = css.length,
         placeholder = '';
+
+
+    css = _extractDataUrls(css, preservedTokens);
 
     // collect all comment blocks...
     while ((startIndex = css.indexOf("/*", startIndex)) >= 0) {
@@ -183,6 +296,7 @@ function cssmin(css, linebreakpos) {
     // would become
     //     filter: chroma(color="#FFF");
     // which makes the filter break in IE.
+    /*
     css = css.replace(/([^"'=\s])(\s*)#([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])/gi, function () {
         var group = arguments;
         if (
@@ -195,6 +309,8 @@ function cssmin(css, linebreakpos) {
             return group[0].toLowerCase();
         }
     });
+    */
+    css = _compressHexColors(css);
 
     // border: none -> border:0
     css = css.replace(/(border|border-top|border-right|border-bottom|border-right|outline|background):none(;|\})/gi, function(all, prop, tail) {
