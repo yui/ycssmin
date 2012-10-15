@@ -1,34 +1,77 @@
-h2. Description
+CSSMin
+======
 
-This is a node.js module that minimize CSS files (cssmin).
-It uses a port of YUICompressor made in JavaScript by Stoyan Stefanov based on Isaac Schlueter work.
-For more informations about YUICompressor -> https://github.com/yui/yuicompressor
+This project is a fork of [jbleuzen/node-cssmin](https://github.com/jbleuzen/node-cssmin).
 
-h2. Installation
+It was originally based on the javascript for of the css minification tool used inside of 
+[YUICompressor](https://github.com/yui/yuicompressor) based on code from Stoyan Stefanov and Isaac Schlueter.
 
-You can either download the plugin and unzip it into to your project folder or you can use npm to install the cssmin package.
+We forked this project in order to maintain and up keep it on a regular basis.
 
-pre.. npm -g i cssmin
 
-h2. Usage
+Installation
+------------
 
-The module exports the cssmin function, so you can use it with : 
+You can either download the plugin and unzip it into to your project folder or you can use npm to install the `ycssmin` package.
 
-pre. var cssmin = require('cssmin').cssmin;
+`npm -g i ycssmin`
 
-The function cssmin takes two arguments :
-* input : the CSS content you want to minimize.
-* linebreakpos : the number of characters before the end of the line. If empty, the output will have only one line.
+Build Status
+------------
+
+[![Build Status](https://secure.travis-ci.org/yui/ycssmin.png)](http://travis-ci.org/yui/ycssmin)
+
+Usage
+-----
+
+The module exports the cssmin function, so you can use it with: 
+
+`var cssmin = require('ycssmin').cssmin;`
+
+The function cssmin takes two arguments:
+* `input` : the CSS content you want to minimize.
+* `linebreakpos` : the number of characters before the end of the line. If empty, the output will have only one line.
 	
 Example :
 
-pre.. var puts = require('util').puts,
-fs = require('fs'),
-cssmin = require('./cssmin').cssmin;
-var css = fs.readFileSync("/Any/Random/CSS/File.css", encoding='utf8');
-var min = cssmin(css);
-puts(min);
+```javascript
+var fs = require('fs'),
+    cssmin = require('ycssmin').cssmin,
+    css = fs.readFileSync("/Any/Random/CSS/File.css", encoding='utf8'),
+    min = cssmin(css);
 
-h2. License
+console.log(min);
+```
 
-cssmin is released under a "BSD License":http://opensource.org/licenses/bsd-license.php.
+License
+-------
+
+    Copyright 2012 Yahoo! Inc.
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+        * Redistributions of source code must retain the above copyright
+          notice, this list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright
+          notice, this list of conditions and the following disclaimer in the
+          documentation and/or other materials provided with the distribution.
+        * Neither the name of the Yahoo! Inc. nor the
+          names of its contributors may be used to endorse or promote products
+          derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL YAHOO! INC. BE LIABLE FOR ANY
+    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Thanks
+------
+
+Thanks to Johan BLEUZEN for originally porting this to node.js
