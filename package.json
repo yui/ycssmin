@@ -9,7 +9,7 @@
     "devDependencies": {
         "yui-lint": "~0.1.1",
         "jshint": "~0.9.0",
-        "istanbul": "https://github.com/gotwarlost/istanbul/tarball/textreport",
+        "istanbul": "~0.1.8",
         "vows": "*" 
     },
     "author": "Dav Glass <davglass@gmail.com>",
@@ -23,7 +23,7 @@
     ],
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json cssmin.js package.json",
-        "test": "istanbul cover --console both -- vows --spec ./tests/*.js"
+        "test": "istanbul cover --print both -- vows --spec ./tests/*.js"
     },
     "repository" : {
         "type" : "git",
