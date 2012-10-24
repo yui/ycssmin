@@ -233,8 +233,9 @@ function cssmin(css, linebreakpos) {
     // But, be careful not to turn "p :link {...}" into "p:link{...}"
     // Swap out any pseudo-class colons with the token, and then swap back.
     css = css.replace(/(^|\})(([^\{:])+:)+([^\{]*\{)/g, function (m) {
-        return m.replace(":", "___YUICSSMIN_PSEUDOCLASSCOLON___");
+        return m.replace(/\:/g, "___YUICSSMIN_PSEUDOCLASSCOLON___");
     });
+
     css = css.replace(/\s+([!{};:>+\(\)\],])/g, '$1');
     css = css.replace(/___YUICSSMIN_PSEUDOCLASSCOLON___/g, ":");
 

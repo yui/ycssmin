@@ -1,1 +1,1 @@
-p :link{ba:zinga;foo:bar}
+p :link,div :link{ba:zinga;foo:bar}
