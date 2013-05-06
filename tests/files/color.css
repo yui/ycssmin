@@ -3,6 +3,7 @@
   impressed: #FfEedD;
   again: #ABCDEF;
   andagain:#aa66cc;
+  test-overflow:rgb(1000,500,300);
   background-color:#aa66ccc;
   filter: chroma(color="#FFFFFF");
   background: none repeat scroll 0 0 rgb(255, 0,0);

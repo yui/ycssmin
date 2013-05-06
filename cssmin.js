@@ -283,7 +283,7 @@ function cssmin(css, linebreakpos) {
     css = css.replace(/rgb\s*\(\s*([0-9,\s]+)\s*\)/gi, function () {
         var i, rgbcolors = arguments[1].split(',');
         for (i = 0; i < rgbcolors.length; i = i + 1) {
-            rgbcolors[i] = parseInt(rgbcolors[i], 10).toString(16);
+            rgbcolors[i] = Math.min(parseInt(rgbcolors[i], 10), 255).toString(16);
             if (rgbcolors[i].length === 1) {
                 rgbcolors[i] = '0' + rgbcolors[i];
             }
