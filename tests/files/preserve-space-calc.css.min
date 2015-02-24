@@ -1,0 +1,1 @@
+.preserved{width:calc(100% - 30px);height:calc(80px + 10px + 10%);top:calc(3px - 3px);left:calc(40% - 10% + 30% + 10px)}
