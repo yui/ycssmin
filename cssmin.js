@@ -117,7 +117,7 @@ var _extractDataUrls = function (css, preservedTokens) {
 
         if (foundTerminator) {
             token = css.substring(startIndex, endIndex);
-            token = token.replace(/\s+/g, "");
+            token = token.replace(/\s+/g, " ");
             preservedTokens.push(token);
 
             preserver = "url(___YUICSSMIN_PRESERVED_TOKEN_" + (preservedTokens.length - 1) + "___)";
